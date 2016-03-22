@@ -1,5 +1,7 @@
 package controller;
 
+
+import model.Direct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.MultipartConfigFactory;
@@ -17,12 +19,12 @@ public class Application {
     @Bean
     public MultipartConfigElement multipartConfigElement(){
         MultipartConfigFactory factory = new MultipartConfigFactory();
-        factory.setMaxFileSize("128KB");
-        factory.setMaxRequestSize("128KB");
+        factory.setMaxFileSize("2048KB");
+        factory.setMaxRequestSize("2048KB");
         return factory.createMultipartConfig();
     }
     public static void main (String[] args){
         SpringApplication.run(Application.class, args);
-
+        Direct.add();
     }
 }

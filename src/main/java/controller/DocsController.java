@@ -1,15 +1,16 @@
 package controller;
 
 
+import model.Direct;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
 
 @RestController
 public class DocsController {
+
+    private final String path = "C:/directSberTat/";
 
     @RequestMapping(value="/upload", method=RequestMethod.GET)
     public String provideUploadInfo() {
@@ -18,19 +19,7 @@ public class DocsController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String handleFileUpload(@RequestParam("name") String name, @RequestParam("file")MultipartFile file){
-        if(!file.isEmpty()){
-            try{
-                byte[] bytes = file.getBytes();
-                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(name + "-uploaded")));
-                stream.write(bytes);
-                stream.close();
-                return "Вы удачно загрузили " + name + " в " + name + "-upload !";
-            }catch (Exception e){
-                return "Вам не удалось загрузить " + name + " => " + e.getMessage();
-            }
-        }else {
-            return "Вам не удалось загрузить " + name + " Потому что файл пустой.";
-        }
+        return Direct.saveFile(name, path, file);
     }
 
 }
