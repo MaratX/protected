@@ -5,13 +5,19 @@ package model;
  */
 public class Docs {
 
-    private final long Id;
-    private final String Name;
-    private final String Link;
+    private long Id;
+    private String Name;
+    private String Link;
 
-    public Docs(long id, String name, String link) {
+    public void setId(long id) {
         Id = id;
+    }
+
+    public void setName(String name) {
         Name = name;
+    }
+
+    public void setLink(String link) {
         Link = link;
     }
 

@@ -11,6 +11,7 @@ import java.io.*;
 public class DocsController {
 
     private final String path = "C:/directSberTat/";
+    protected static long count = Direct.countDirect();
 
     @RequestMapping(value="/upload", method=RequestMethod.GET)
     public String provideUploadInfo() {
@@ -19,7 +20,8 @@ public class DocsController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String handleFileUpload(@RequestParam("name") String name, @RequestParam("file")MultipartFile file){
-        return Direct.saveFile(name, path, file);
+        count++;
+        return Direct.saveFile(name, count, path, file);
     }
 
 }
