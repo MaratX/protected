@@ -17,7 +17,7 @@ public class DocsJDBCTemplate implements DocImpl {
         this.dataSource = dateSource;
         this.jdbcTemplate = new JdbcTemplate(dateSource);
     }
-    public void create(String name, String link){
+    public void create(String name, long link){
         String SQL = "insert into Docs (name, link) values(?,?)";
         jdbcTemplate.update(SQL, name, link);
     }

@@ -11,7 +11,7 @@ import java.util.List;
 public interface DocImpl {
     public void setDataSource(DataSource ds);
 
-    public void create(String name, String link);
+    public void create(String name, long link);
 
     public Docs getDocById(Integer id);
 
