@@ -26,7 +26,7 @@ public class DocsJDBCTemplate implements DocImpl {
         Docs docs = jdbcTemplate.queryForObject(SQL, new Object[]{id}, new DocsMapper());
         return docs;
     }
-    public List<Docs> listDocs(long tabul){
+    public List<Docs> listDocs(int tabul){
         String SQL = "select * from Docs";
         List<Docs> docsList = jdbcTemplate.query(SQL, new DocsMapper());
         return docsList;
