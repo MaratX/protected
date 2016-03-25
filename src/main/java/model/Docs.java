@@ -7,7 +7,16 @@ public class Docs {
 
     private long Id;
     private String Name;
-    private String Link;
+    private long Link;
+    private String format;
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
 
     public void setId(long id) {
         Id = id;
@@ -17,7 +26,7 @@ public class Docs {
         Name = name;
     }
 
-    public void setLink(String link) {
+    public void setLink(long link) {
         Link = link;
     }
 
@@ -29,7 +38,7 @@ public class Docs {
         return Name;
     }
 
-    public String getLink() {
+    public long getLink() {
         return Link;
     }
 }

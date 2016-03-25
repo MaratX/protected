@@ -1,28 +1,24 @@
 package controller;
 
 
-import DAO.DocsJDBCTemplate;
 import baseData.DocImpl;
 import baseData.Docjdbc;
 import model.Direct;
 import model.Docs;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
 import java.util.List;
+import java.io.File;
 
 @RestController
 public class DocsController {
 
     private final String path = "C:/directSberTat/";
     protected static long link = Direct.countDirect();
-    DocImpl doc = new Docjdbc();
 
-    //ApplicationContext context = new ClassPathXmlApplicationContext("Bean.xml");
-    //DocsJDBCTemplate jdbc = (DocsJDBCTemplate) context.getBean("DocsJDBCTemplate");
+
+
 
     @RequestMapping(value="/upload", method=RequestMethod.GET)
     public String provideUploadInfo() {
@@ -32,13 +28,17 @@ public class DocsController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String handleFileUpload(@RequestParam("name") String name, @RequestParam("file")MultipartFile file){
         link++;
-        String s = doc.create(name, link);
-        return s + " " + Direct.saveFile(name, link, path, file);
+        return Direct.saveFile(name, link, path, file);
     }
 
     @RequestMapping(value = "/getDoc", method = RequestMethod.GET)
     public List<Docs> getFileList(@RequestParam(value = "tabul", defaultValue = "0") int tabul){
         return null;
+    }
+    @RequestMapping(value = "/delete")
+    public String deleteFile(@RequestParam(value = "id", required = false) int id){
+        System.out.println("yes 1");
+        return Direct.deleteFile(id);
     }
 
 }

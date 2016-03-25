@@ -16,25 +16,34 @@ public class Docjdbc implements baseData.DocImpl {
     PreparedStatement PS = null;
 
     @Override
-    public String create(String name, long link){
-        String SQL = "insert into cloude.document (docName, docLink) values(?,?)";
+    public String create(String name, long link, String format){
+        String SQL = "insert into cloude.document (docName, docLink, docFormat) values(?,?, ?)";
         try {
             PS = bd.getPS(SQL);
             PS.setString(1, name);
             PS.setLong(2, link);
+            PS.setString(3, format);
             PS.executeUpdate();
             return "Документ загружен";
         }catch (Exception e){
-            System.out.println("INFO " + e);
             return "Ошибка : документ не удалось загрузить";
+        }finally {
+            PS = null;
         }
 
     }
 
     @Override
-    public Docs getDocById(Integer id) {
-        String SQL = "";
-        return null;
+    public Docs getDocById(Integer id) throws Exception{
+        String SQL = "SELECT * FROM document WHERE id = " + id;
+        rs = bd.getStm().executeQuery(SQL);
+        Docs d = new Docs();
+        rs.next();
+        d.setName(rs.getString("docName"));
+        d.setLink(rs.getLong("docLink"));
+        d.setFormat(rs.getString("docFormat"));
+        rs.close();
+        return d;
     }
 
     @Override
@@ -44,9 +53,13 @@ public class Docjdbc implements baseData.DocImpl {
     }
 
     @Override
-    public void delete(Integer id) {
-        String SQL = "";
-
+    public String delete(Integer id) throws Exception{
+        String SQL = "DELETE FROM cloude.document where  id = ?";
+            PS = bd.getPS(SQL);
+            PS.setInt(1, id);
+            PS.executeUpdate();
+            PS = null;
+        return "Запись удалена";
     }
 
     @Override

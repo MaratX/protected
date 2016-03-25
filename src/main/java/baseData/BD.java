@@ -12,7 +12,7 @@ public class BD {
 
     private static final String URL = "jdbc:mysql://localhost:3306/cloude";
     private static final String USER = "root";
-    private static final String PASS = "rhtjynbjc1";
+    private static final String PASS = "Rhtjynbjc1";
 
     private static Connection conn = null;
     private static Statement stm = null;
