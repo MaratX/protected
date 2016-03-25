@@ -17,7 +17,7 @@ public class Docjdbc implements baseData.DocImpl {
 
     @Override
     public String create(String name, long link, String format){
-        String SQL = "insert into cloude.document (docName, docLink, docFormat) values(?,?, ?)";
+        String SQL = "insert into cloude.document (docName, docLink, docFormat) values(?,?,?)";
         try {
             PS = bd.getPS(SQL);
             PS.setString(1, name);
@@ -63,8 +63,17 @@ public class Docjdbc implements baseData.DocImpl {
     }
 
     @Override
-    public void update(Integer id, String name) {
-        String SQL = "";
+    public String update(Integer id, String name) {
+        String SQL = "UPDATE cloude.document SET docName=? WHERE id=?";
+        try{
+            PS = bd.getPS(SQL);
+            PS.setString(1, name);
+            PS.setInt(2, id);
+            PS.executeUpdate();
+            return "Документ " + name + " обновлен";
+        }catch (Exception e){
+            return "Ошибка: документ не удалось обновить";
+        }
 
     }
 }

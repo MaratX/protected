@@ -64,4 +64,8 @@ public class Direct {
         else return "";
     }
 
+    public static String renameFile(int id, String name){
+        return doc.update(id, name);
+    }
+
 }

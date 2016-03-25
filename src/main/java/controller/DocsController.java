@@ -35,10 +35,16 @@ public class DocsController {
     public List<Docs> getFileList(@RequestParam(value = "tabul", defaultValue = "0") int tabul){
         return null;
     }
+
+
     @RequestMapping(value = "/delete")
     public String deleteFile(@RequestParam(value = "id", required = false) int id){
-        System.out.println("yes 1");
         return Direct.deleteFile(id);
+    }
+
+    @RequestMapping(value = "/rename")
+    public String updateFile(@RequestParam(value = "id", required = false) int id, @RequestParam("name") String name){
+        return Direct.renameFile(id,name);
     }
 
 }

@@ -16,5 +16,5 @@ public interface DocImpl {
 
     public String delete(Integer id) throws Exception;
 
-    public void update(Integer id, String name);
+    public String update(Integer id, String name);
 }
