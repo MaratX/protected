@@ -5,6 +5,8 @@ import baseData.Docjdbc;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Direct {
 
@@ -32,7 +34,6 @@ public class Direct {
         }
     }
 
-
     public static String deleteFile(Integer id){
         if(id != null){
             try{
@@ -51,6 +52,27 @@ public class Direct {
         return null;
     }
 
+    public static String renameFile(int id, String name){
+        try {
+            doc.update(id, name);
+            return "Документ обнавлен";
+        }catch (Exception e){
+            return "Ошибка обнавления";
+        }
+    }
+
+    public static ArrayList<Docs> listFile(int tabul){
+        try {
+            return doc.listDocs(tabul);
+        }catch (Exception e){
+            System.out.println("INFO: " + e);
+            return null;
+        }
+    }
+
+
+
+
     public static long countDirect(){
         File count = new File("C:/directSberTat");
         return count.list().length;
@@ -64,8 +86,6 @@ public class Direct {
         else return "";
     }
 
-    public static String renameFile(int id, String name){
-        return doc.update(id, name);
-    }
+
 
 }

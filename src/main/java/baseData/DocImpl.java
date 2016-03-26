@@ -2,6 +2,7 @@ package baseData;
 
 import model.Docs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,9 +13,9 @@ public interface DocImpl {
 
     public Docs getDocById(Integer id) throws Exception;
 
-    public List<Docs> listDocs(int tabul);
+    public ArrayList<Docs> listDocs(int tabul) throws Exception;
 
     public String delete(Integer id) throws Exception;
 
-    public String update(Integer id, String name);
+    public String update(Integer id, String name) throws Exception;
 }

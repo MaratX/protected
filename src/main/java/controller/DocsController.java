@@ -21,19 +21,19 @@ public class DocsController {
 
 
     @RequestMapping(value="/upload", method=RequestMethod.GET)
-    public String provideUploadInfo() {
+    public String addFileInfo() {
         return "Вы можете загружать файл с использованием того же URL.";
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String handleFileUpload(@RequestParam("name") String name, @RequestParam("file")MultipartFile file){
+    public String addFile(@RequestParam("name") String name, @RequestParam("file")MultipartFile file){
         link++;
         return Direct.saveFile(name, link, path, file);
     }
 
-    @RequestMapping(value = "/getDoc", method = RequestMethod.GET)
+    @RequestMapping(value = "/getDocList", method = RequestMethod.GET)
     public List<Docs> getFileList(@RequestParam(value = "tabul", defaultValue = "0") int tabul){
-        return null;
+        return Direct.listFile(tabul);
     }
 
 
@@ -43,7 +43,7 @@ public class DocsController {
     }
 
     @RequestMapping(value = "/rename")
-    public String updateFile(@RequestParam(value = "id", required = false) int id, @RequestParam("name") String name){
+    public String renameFile(@RequestParam(value = "id", required = false) int id, @RequestParam("name") String name){
         return Direct.renameFile(id,name);
     }
 

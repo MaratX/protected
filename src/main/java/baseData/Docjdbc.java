@@ -4,6 +4,7 @@ import model.Docs;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +15,7 @@ public class Docjdbc implements baseData.DocImpl {
     BD bd = new BD();
     ResultSet rs = null;
     PreparedStatement PS = null;
+
 
     @Override
     public String create(String name, long link, String format){
@@ -47,9 +49,29 @@ public class Docjdbc implements baseData.DocImpl {
     }
 
     @Override
-    public List<Docs> listDocs(int tabul) {
-        String SQL = "";
-        return null;
+    public ArrayList<Docs> listDocs(int tabul) throws Exception{
+        ArrayList<Docs> list = new ArrayList<>();
+        Docs d = new Docs();
+        String SQL = "SELECT id, docName, docFormat FROM cloude.document WHERE id >= ? LIMIT 20";
+        PS = bd.getCon().prepareStatement(SQL);
+        PS.setInt(1, tabul);
+        rs = PS.executeQuery();
+
+        while (rs.next()){
+            list.add(rsDoc(rs));
+        }
+        PS.close();
+        rs.close();
+        return list;
+    }
+
+    private Docs rsDoc(ResultSet rs) throws Exception{
+        Docs d = new Docs();
+        d.setId(rs.getInt("id"));
+        d.setName(rs.getString("docName"));
+        d.setLink(0);
+        d.setFormat(rs.getString("docFormat"));
+        return d;
     }
 
     @Override
@@ -58,22 +80,18 @@ public class Docjdbc implements baseData.DocImpl {
             PS = bd.getPS(SQL);
             PS.setInt(1, id);
             PS.executeUpdate();
-            PS = null;
+            PS.close();
         return "Запись удалена";
     }
 
     @Override
-    public String update(Integer id, String name) {
+    public String update(Integer id, String name) throws Exception{
         String SQL = "UPDATE cloude.document SET docName=? WHERE id=?";
-        try{
             PS = bd.getPS(SQL);
             PS.setString(1, name);
-            PS.setInt(2, id);
+        PS.setInt(2, id);
             PS.executeUpdate();
-            return "Документ " + name + " обновлен";
-        }catch (Exception e){
-            return "Ошибка: документ не удалось обновить";
-        }
-
+            PS.close();
+        return "Документ " + name + " обновлен";
     }
 }
