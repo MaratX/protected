@@ -40,5 +40,14 @@ public class BD {
         }
         return PS;
     }
+    public void closeConn(){
+        conn = null;
+    }
+    public void closeStm(){
+        stm = null;
+    }
+    public void closePS(){
+        PS = null;
+    }
 
 }

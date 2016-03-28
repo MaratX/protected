@@ -44,7 +44,12 @@ public class DocsController {
 
     @RequestMapping(value = "/rename")
     public String renameFile(@RequestParam(value = "id", required = false) int id, @RequestParam("name") String name){
-        return Direct.renameFile(id,name);
+        return Direct.renameFile(id, name);
+    }
+
+    @RequestMapping(value = "/getDocInfo")
+    public Docs getDocInfo(@RequestParam(value = "id", required = false) int id){
+        return Direct.getDocInfo(id);
     }
 
 }

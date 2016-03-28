@@ -54,10 +54,10 @@ public class Direct {
 
     public static String renameFile(int id, String name){
         try {
-            doc.update(id, name);
-            return "Документ обнавлен";
+
+            return doc.update(id, name);
         }catch (Exception e){
-            return "Ошибка обнавления";
+            return "Ошибка обнавления" + e;
         }
     }
 
@@ -70,7 +70,13 @@ public class Direct {
         }
     }
 
-
+    public static Docs getDocInfo(int id){
+        try {
+            return doc.getDocById(id);
+        }catch (Exception e){
+            return null;
+        }
+    }
 
 
     public static long countDirect(){

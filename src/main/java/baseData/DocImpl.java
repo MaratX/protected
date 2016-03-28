@@ -9,7 +9,7 @@ import java.util.List;
  * Created by HMF on 24.03.2016.
  */
 public interface DocImpl {
-    public String create(String name, long link, String format);
+    public String create(String name, long link, String format) throws Exception;
 
     public Docs getDocById(Integer id) throws Exception;
 
@@ -17,5 +17,5 @@ public interface DocImpl {
 
     public String delete(Integer id) throws Exception;
 
-    public String update(Integer id, String name) throws Exception;
+    public String update(int id, String name) throws Exception;
 }
