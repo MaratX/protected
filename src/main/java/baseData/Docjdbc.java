@@ -80,7 +80,7 @@ public class Docjdbc implements baseData.DocImpl {
 
     @Override
     public String update(int id, String name) throws Exception{
-        String SQL = "UPDATE cloude.document SET docName='?' WHERE id=?";
+        String SQL = "UPDATE cloude.document SET docName = ? WHERE id = ?";
             PS = bd.getPS(SQL);
             PS.setString(1, name);
             PS.setInt(2, id);
