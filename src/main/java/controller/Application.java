@@ -8,12 +8,14 @@ import org.springframework.boot.context.embedded.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import javax.servlet.MultipartConfigElement;
 
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
+@PropertySource("classpath:application.properties")
 public class Application {
 
     @Bean
